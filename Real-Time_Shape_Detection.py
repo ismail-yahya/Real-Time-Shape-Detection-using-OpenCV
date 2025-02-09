@@ -9,6 +9,8 @@ def detect_shapes(frame):
     contours, _ = cv2.findContours(edges, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     
     for contour in contours:
+        if cv2.contourArea(contour) < 500:  
+            continue
         epsilon = 0.02 * cv2.arcLength(contour, True)
         approx = cv2.approxPolyDP(contour, epsilon, True)
         
